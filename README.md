@@ -21,3 +21,11 @@ Here is a simple outline of how you might go about writing a Game Boy emulator i
 7. Put it all together by writing a main function that creates instances of the CPU, memory, graphics, and input structs and connects them together. You will also need to write a loop that fetches and executes instructions from the ROM and updates the graphics and input state.
 
 I hope this helps! This is just a high-level overview, and there will be many more details to consider when writing a fully-featured Game Boy emulator. Let me know if you have any questions or need further guidance
+
+## Resources
+
+https://gbdev.io/pandocs/
+
+https://www.youtube.com/watch?v=e87qKixKFME
+
+https://www.pastraiser.com/cpu/gameboy/gameboy_opcodes.html
