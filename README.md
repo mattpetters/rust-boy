@@ -2,6 +2,7 @@
 
 A Gameboy emulator written in Rust.
 
+<img src="https://i.imgur.com/0GDI7HD.png" width="500">
 <img src="https://i.imgur.com/sAcRA67.png" width="500" >
 
 ## Todo
