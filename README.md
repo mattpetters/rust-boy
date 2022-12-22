@@ -69,3 +69,9 @@ https://www.youtube.com/watch?v=B7seNuQncvU
 https://github.com/Gekkio/mooneye-gb
 
 https://mozilla.github.io/firefox-browser-architecture/experiments/2017-09-06-rust-on-ios.html
+
+## iOS Support
+
+wgpu and cpal have some iOS support, so I will attempt to get this working on iOS.
+
+https://github.com/gfx-rs/wgpu/issues/260
