@@ -1,6 +1,6 @@
-use crate::cpu::cpu::Cpu;
-use crate::memory::mmu::{Mmu, Opcode};
-use crate::util::binary::bytes_to_word;
+use crate::lib::cpu::cpu::Cpu;
+use crate::lib::memory::mmu::{Mmu, Opcode};
+use crate::lib::util::binary::bytes_to_word;
 
 pub mod cb_instructions;
 mod functions;

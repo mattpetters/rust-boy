@@ -1,7 +1,7 @@
-use crate::apu::channel::frame_sequencer::FrameSequencer;
-use crate::apu::channel::length_counter::{LengthCounter, LengthCounterResult};
-use crate::apu::Channel;
-use crate::util::binary::is_bit_set;
+use crate::lib::apu::channel::frame_sequencer::FrameSequencer;
+use crate::lib::apu::channel::length_counter::{LengthCounter, LengthCounterResult};
+use crate::lib::apu::Channel;
+use crate::lib::util::binary::is_bit_set;
 use std::i16;
 
 const WAVETABLE_START_ADDRESS: u16 = 0xFF30;

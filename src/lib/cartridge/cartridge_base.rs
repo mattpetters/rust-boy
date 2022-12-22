@@ -1,4 +1,4 @@
-use crate::cartridge::{create_ram, RamDumper, EXT_RAM_ADDRESS, EXT_RAM_SIZE};
+use crate::lib::cartridge::{create_ram, RamDumper, EXT_RAM_ADDRESS, EXT_RAM_SIZE};
 
 pub struct CartridgeBase {
     pub rom: Vec<u8>,

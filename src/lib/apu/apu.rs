@@ -1,11 +1,11 @@
-use crate::apu::channel::frame_sequencer::FrameSequencer;
-use crate::apu::channel::noise_channel::NoiseChannel;
-use crate::apu::channel::square_channel::SquareChannel;
-use crate::apu::channel::wave_channel::WaveChannel;
-use crate::apu::mixer::Mixer;
-use crate::apu::{AudioOutput, Channel};
-use crate::emulation::CPU_CLOCK_HZ;
-use crate::util::binary::is_bit_set;
+use crate::lib::apu::channel::frame_sequencer::FrameSequencer;
+use crate::lib::apu::channel::noise_channel::NoiseChannel;
+use crate::lib::apu::channel::square_channel::SquareChannel;
+use crate::lib::apu::channel::wave_channel::WaveChannel;
+use crate::lib::apu::mixer::Mixer;
+use crate::lib::apu::{AudioOutput, Channel};
+use crate::lib::emulation::CPU_CLOCK_HZ;
+use crate::lib::util::binary::is_bit_set;
 
 const SQUARE_CHANNEL_1_START_ADDRESS: u16 = 0xFF10;
 const SQUARE_CHANNEL_1_END_ADDRESS: u16 = 0xFF14;

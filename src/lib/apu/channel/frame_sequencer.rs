@@ -1,4 +1,4 @@
-use crate::emulation::CPU_CLOCK_HZ;
+use crate::lib::emulation::CPU_CLOCK_HZ;
 
 const CYCLES_VOLUME_ENVELOPE_TIMER: u32 = (CPU_CLOCK_HZ / 64) as u32;
 const CYCLES_LENGTH_COUNTER_TIMER: u32 = (CPU_CLOCK_HZ / 256) as u32;

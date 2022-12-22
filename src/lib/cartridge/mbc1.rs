@@ -1,5 +1,5 @@
-use crate::cartridge::cartridge_base::CartridgeBase;
-use crate::cartridge::{get_ram_size, Cartridge, RamDumper, CARTRIDGE_TYPE_ADDRESS};
+use crate::lib::cartridge::cartridge_base::CartridgeBase;
+use crate::lib::cartridge::{get_ram_size, Cartridge, RamDumper, CARTRIDGE_TYPE_ADDRESS};
 
 enum Mode {
     RomBankingMode,

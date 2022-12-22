@@ -1,4 +1,4 @@
-use crate::apu::channel::frame_sequencer::FrameSequencer;
+use crate::lib::apu::channel::frame_sequencer::FrameSequencer;
 
 pub mod apu;
 mod channel;

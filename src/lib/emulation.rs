@@ -1,7 +1,5 @@
-use crate::clock::Clock;
-use crate::cpu::cpu::Cpu;
-use crate::io::joypad::Joypad;
-use crate::memory::mmu::Mmu;
+use super::{clock::Clock, io::joypad::Joypad, memory::mmu::Mmu};
+use crate::lib::cpu::cpu::Cpu;
 
 pub const CPU_CLOCK_HZ: usize = 4194304;
 pub const FPS: f32 = 60.0;

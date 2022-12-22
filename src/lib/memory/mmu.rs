@@ -1,12 +1,11 @@
-use crate::apu::apu::Apu;
-
-use crate::cartridge::Cartridge;
-use crate::gpu::gpu::Gpu;
-use crate::io::joypad::Joypad;
-use crate::io::timer::Timer;
-use crate::memory::interrupts;
-use crate::memory::interrupts::InterruptState;
-use crate::util::binary;
+use crate::lib::apu::apu::Apu;
+use crate::lib::cartridge::Cartridge;
+use crate::lib::gpu::gpu::Gpu;
+use crate::lib::io::joypad::Joypad;
+use crate::lib::io::timer::Timer;
+use crate::lib::memory::interrupts;
+use crate::lib::memory::interrupts::InterruptState;
+use crate::lib::util::binary;
 
 const EXT_RAM_START_ADDRESS: u16 = 0xA000;
 pub const W_RAM_ADDRESS: u16 = 0xC000;

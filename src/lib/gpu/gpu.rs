@@ -1,11 +1,18 @@
-use crate::gpu::lcdc::Lcdc;
-use crate::gpu::stat::{Mode, Stat};
-use crate::gpu::SCREEN_WIDTH;
-use crate::gpu::{Screen, BUFFER_SIZE};
-use crate::memory::interrupts::Interrupt;
-use crate::memory::mmu::{OAM_ADDRESS, VRAM_ADDRESS};
-use crate::util::binary::is_bit_set;
 use std::sync::Arc;
+
+use crate::lib::{
+    memory::{
+        interrupts::Interrupt,
+        mmu::{OAM_ADDRESS, VRAM_ADDRESS},
+    },
+    util::binary::is_bit_set,
+};
+
+use super::{
+    lcdc::Lcdc,
+    stat::{Mode, Stat},
+    Screen, BUFFER_SIZE, SCREEN_WIDTH,
+};
 
 const V_RAM_SIZE: usize = 8192;
 const OAM_SIZE: usize = 160;

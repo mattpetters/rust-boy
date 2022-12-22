@@ -1,9 +1,9 @@
-use crate::cpu::cpu::Cpu;
-use crate::cpu::instructions::{
+use crate::lib::cpu::cpu::Cpu;
+use crate::lib::cpu::instructions::{
     functions, read_hl_addr, write_hl_addr, ExecutionType, Instruction,
 };
-use crate::memory::mmu::{Mmu, Opcode};
-use crate::util::binary::{reset_bit_in_byte, set_bit_in_byte};
+use crate::lib::memory::mmu::{Mmu, Opcode};
+use crate::lib::util::binary::{reset_bit_in_byte, set_bit_in_byte};
 
 //TODO: Fix descriptions
 macro_rules! bit {

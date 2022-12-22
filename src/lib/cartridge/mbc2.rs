@@ -1,5 +1,5 @@
-use crate::cartridge::cartridge_base::CartridgeBase;
-use crate::cartridge::{Cartridge, RamDumper, CARTRIDGE_TYPE_ADDRESS};
+use crate::lib::cartridge::cartridge_base::CartridgeBase;
+use crate::lib::cartridge::{Cartridge, RamDumper, CARTRIDGE_TYPE_ADDRESS};
 
 pub struct Mbc2 {
     cartridge_base: CartridgeBase,

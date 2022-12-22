@@ -1,7 +1,7 @@
-use crate::apu::channel::noise_channel::NoiseChannel;
-use crate::apu::channel::square_channel::SquareChannel;
-use crate::apu::channel::wave_channel::WaveChannel;
-use crate::apu::Channel;
+use crate::lib::apu::channel::noise_channel::NoiseChannel;
+use crate::lib::apu::channel::square_channel::SquareChannel;
+use crate::lib::apu::channel::wave_channel::WaveChannel;
+use crate::lib::apu::Channel;
 
 const BASE_ADDRESS: u16 = 0xFF24;
 

@@ -1,9 +1,9 @@
-use crate::apu::channel::frame_sequencer::FrameSequencer;
-use crate::apu::channel::frequency_sweep::{FrequencySweep, FrequencySweepResult};
-use crate::apu::channel::length_counter::{LengthCounter, LengthCounterResult};
-use crate::apu::channel::volume_envelope::VolumeEnvelope;
-use crate::apu::Channel;
-use crate::util::binary::is_bit_set;
+use crate::lib::apu::channel::frame_sequencer::FrameSequencer;
+use crate::lib::apu::channel::frequency_sweep::{FrequencySweep, FrequencySweepResult};
+use crate::lib::apu::channel::length_counter::{LengthCounter, LengthCounterResult};
+use crate::lib::apu::channel::volume_envelope::VolumeEnvelope;
+use crate::lib::apu::Channel;
+use crate::lib::util::binary::is_bit_set;
 use std::i16;
 
 const DUTY_MAP: [[i16; 8]; 4] = [

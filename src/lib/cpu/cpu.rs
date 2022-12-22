@@ -1,9 +1,9 @@
-use crate::cpu::instructions;
-use crate::cpu::instructions::{ExecutionType, Instruction};
-use crate::cpu::interrupt_handler::handle_interrupts;
-use crate::cpu::registers::Registers;
-use crate::memory::interrupts::Interrupt;
-use crate::memory::mmu::{Mmu, Opcode};
+use crate::lib::cpu::instructions;
+use crate::lib::cpu::instructions::{ExecutionType, Instruction};
+use crate::lib::cpu::interrupt_handler::handle_interrupts;
+use crate::lib::cpu::registers::Registers;
+use crate::lib::memory::interrupts::Interrupt;
+use crate::lib::memory::mmu::{Mmu, Opcode};
 
 pub enum InterruptAction {
     None,

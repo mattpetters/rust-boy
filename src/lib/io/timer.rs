@@ -1,5 +1,5 @@
-use crate::memory::interrupts::Interrupt;
-use crate::util::binary::is_bit_set;
+use crate::lib::memory::interrupts::Interrupt;
+use crate::lib::util::binary::is_bit_set;
 
 const DIVIDER_CYCLES: u32 = 256;
 const SPEED_0_CYCLES: u32 = 1024;

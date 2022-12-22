@@ -1,6 +1,6 @@
-use crate::cpu::cpu::Cpu;
-use crate::memory::interrupts::Interrupt;
-use crate::memory::mmu::Mmu;
+use crate::lib::cpu::cpu::Cpu;
+use crate::lib::memory::interrupts::Interrupt;
+use crate::lib::memory::mmu::Mmu;
 
 pub fn handle_interrupts(cpu: &mut Cpu, mmu: &mut Mmu) -> Option<u8> {
     if handle_interrupt(cpu, mmu, &Interrupt::Vblank, 0x0040) {

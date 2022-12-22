@@ -1,4 +1,4 @@
-use crate::util::binary::is_bit_set;
+use crate::lib::util::binary::is_bit_set;
 #[cfg(feature = "serialize")]
 use serde::{Deserialize, Serialize};
 

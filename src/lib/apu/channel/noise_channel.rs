@@ -1,8 +1,8 @@
-use crate::apu::channel::frame_sequencer::FrameSequencer;
-use crate::apu::channel::length_counter::{LengthCounter, LengthCounterResult};
-use crate::apu::channel::volume_envelope::VolumeEnvelope;
-use crate::apu::Channel;
-use crate::util::binary::is_bit_set;
+use crate::lib::apu::channel::frame_sequencer::FrameSequencer;
+use crate::lib::apu::channel::length_counter::{LengthCounter, LengthCounterResult};
+use crate::lib::apu::channel::volume_envelope::VolumeEnvelope;
+use crate::lib::apu::Channel;
+use crate::lib::util::binary::is_bit_set;
 
 const DIVISOR_CODE_MAP: [usize; 8] = [8, 16, 32, 48, 64, 80, 96, 112];
 
