@@ -1,16 +1,11 @@
-#[cfg(feature = "serialize")]
-#[macro_use]
-extern crate serde_derive;
-
 pub mod lib {
+    pub mod apu;
+    pub mod cartridge;
+    pub mod clock;
     pub mod cpu;
-    mod gpu;
-    mod interrupt_flags;
-    mod joypad;
-    mod memory_bus;
-    mod timer;
-    mod utils;
-
-    pub use cpu::CPU;
-    pub use joypad::Joypad;
+    pub mod emulation;
+    pub mod gpu;
+    pub mod io;
+    pub mod memory;
+    pub mod util;
 }

@@ -1,90 +1,57 @@
-use super::flags_register::FlagsRegister;
+pub enum Flag {
+    Z = 0x80,
+    N = 0x40,
+    H = 0x20,
+    C = 0x10,
+}
 
-#[derive(Copy, Clone, Debug, PartialEq)]
-#[cfg_attr(feature = "serialize", derive(Serialize))]
 pub struct Registers {
     pub a: u8,
     pub b: u8,
     pub c: u8,
     pub d: u8,
     pub e: u8,
-    pub f: FlagsRegister,
     pub h: u8,
     pub l: u8,
+    pub f: u8,
+    pub pc: u16,
+    pub sp: u16,
 }
 
 impl Registers {
     pub fn new() -> Registers {
+        //Set initial values according to pandocs
         Registers {
-            a: 0,
-            b: 0,
-            c: 0,
-            d: 0,
-            e: 0,
-            f: FlagsRegister::new(),
-            h: 0,
-            l: 0,
+            a: 0x01,
+            b: 0x00,
+            c: 0x13,
+            d: 0x00,
+            e: 0xD8,
+            h: 0x01,
+            l: 0x4D,
+            f: 0xB0,
+            pc: 0x100,
+            sp: 0xFFFE,
         }
     }
-    // some instructions write 2 bytes at a time so we need to read and write from these "virtual" 16 bit registers
-    pub fn get_af(&self) -> u16 {
-        (self.a as u16) << 8 | u8::from(self.f) as u16
-    }
-    pub fn set_af(&mut self, value: u16) {
-        self.a = ((value & 0xFF00) >> 8) as u8;
-        self.f = FlagsRegister::from((value & 0xFF) as u8);
+
+    pub fn set_flag(&mut self, flag: Flag) {
+        self.f |= flag as u8
     }
 
-    pub fn get_bc(&self) -> u16 {
-        (self.b as u16) << 8 | self.c as u16
-    }
-    pub fn set_bc(&mut self, value: u16) {
-        self.b = ((value & 0xFF00) >> 8) as u8;
-        self.c = (value & 0xFF) as u8;
+    pub fn clear_flag(&mut self, flag: Flag) {
+        self.f &= flag as u8 ^ 0xFF
     }
 
-    pub fn get_de(&self) -> u16 {
-        (self.d as u16) << 8 | self.e as u16
-    }
-    pub fn set_de(&mut self, value: u16) {
-        self.d = ((value & 0xFF00) >> 8) as u8;
-        self.e = (value & 0xFF) as u8;
-    }
-
-    pub fn get_hl(&self) -> u16 {
-        (self.h as u16) << 8 | self.l as u16
-    }
-    pub fn set_hl(&mut self, value: u16) {
-        self.h = ((value & 0xFF00) >> 8) as u8;
-        self.l = (value & 0xFF) as u8;
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-    #[test]
-    fn can_set_bc() {
-        let mut registers = Registers::new();
-        registers.set_bc(0b1010_1111_1100_1100);
-        assert_eq!(registers.b, 0b1010_1111u8);
-        assert_eq!(registers.c, 0b1100_1100u8);
+    pub fn clear_all_flags(&mut self) {
+        self.clear_flag(Flag::Z);
+        self.clear_flag(Flag::C);
+        self.clear_flag(Flag::H);
+        self.clear_flag(Flag::N);
     }
 
-    #[test]
-    fn can_set_f_as_u8() {
-        let mut registers = Registers::new();
-        let value = 0b1100_0000;
-        registers.f = value.into();
-        let result: u8 = registers.f.into();
-        assert_eq!(result, value);
-    }
-
-    #[test]
-    fn can_set_f_as_flags_struct() {
-        let mut registers = Registers::new();
-        let value: FlagsRegister = 0b1100_0000u8.into();
-        registers.f = value;
-        assert_eq!(registers.f, value);
+    pub fn check_flag(&self, flag: Flag) -> bool {
+        let flag_value = flag as u8;
+        self.f & flag_value == flag_value as u8
     }
 }
