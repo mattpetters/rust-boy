@@ -19,7 +19,7 @@ pub enum EmulationSignal {
     Quit,
 }
 pub fn main() {
-    let config_storage = ConfigStorage::create_from_file("gbemulator.toml".to_string()).unwrap();
+    let config_storage = ConfigStorage::create_from_file("rustboy.toml".to_string()).unwrap();
     let mut window =
         GraphicsWindow::new(160 * 3, (144 * 3) + MENU_BAR_HEIGHT as u32, &config_storage);
 
