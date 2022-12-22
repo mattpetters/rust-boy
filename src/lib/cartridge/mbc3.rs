@@ -1,8 +1,8 @@
 use crate::lib::cartridge::cartridge_base::CartridgeBase;
 use crate::lib::cartridge::{get_ram_size, Cartridge, RamDumper, CARTRIDGE_TYPE_ADDRESS};
 
-const DEFAULT_RAM_BANK: u8 = 0x00;
-const DEFAULT_ROM_BANK: u8 = 0x01;
+// const DEFAULT_RAM_BANK: u8 = 0x00;
+// const DEFAULT_ROM_BANK: u8 = 0x01;
 
 pub const ROM_REGION_START: u16 = 0x0000;
 pub const ROM_REGION_END: u16 = 0x7FFF;
@@ -13,31 +13,31 @@ pub const ERAM_REGION_START: u16 = 0xA000;
 pub const ERAM_REGION_END: u16 = 0xBFFF;
 pub const ERAM_REGION_SIZE: usize = (ERAM_REGION_END - ERAM_REGION_START + 1) as usize;
 
-const RAM_ENABLE_START: u16 = 0x0000;
-const RAM_ENABLE_END: u16 = 0x1FFF;
-const ROM_BANK_SEL_START: u16 = 0x2000;
-const ROM_BANK_SEL_END: u16 = 0x3FFF;
-const RAM_BANK_SEL_START: u16 = 0x4000;
-const RAM_BANK_SEL_END: u16 = 0x5FFF;
-const BANK_MODE_START: u16 = 0x6000;
-const BANK_MODE_END: u16 = 0x7FFF;
+// const RAM_ENABLE_START: u16 = 0x0000;
+// const RAM_ENABLE_END: u16 = 0x1FFF;
+// const ROM_BANK_SEL_START: u16 = 0x2000;
+// const ROM_BANK_SEL_END: u16 = 0x3FFF;
+// const RAM_BANK_SEL_START: u16 = 0x4000;
+// const RAM_BANK_SEL_END: u16 = 0x5FFF;
+// const BANK_MODE_START: u16 = 0x6000;
+// const BANK_MODE_END: u16 = 0x7FFF;
 
-const ERAM_SIZE: usize = 32 * 1024;
-const ROM_REGION_BANK0_START: u16 = ROM_REGION_START;
-const ROM_REGION_BANK0_END: u16 = 0x3FFF;
-const ROM_REGION_BANKN_START: u16 = 0x4000;
-const ROM_REGION_BANKN_END: u16 = ROM_REGION_END;
+// const ERAM_SIZE: usize = 32 * 1024;
+// const ROM_REGION_BANK0_START: u16 = ROM_REGION_START;
+// const ROM_REGION_BANK0_END: u16 = 0x3FFF;
+// const ROM_REGION_BANKN_START: u16 = 0x4000;
+// const ROM_REGION_BANKN_END: u16 = ROM_REGION_END;
 
-const ROM_BANK_SIZE: usize = (ROM_REGION_BANKN_END - ROM_REGION_BANKN_START + 1) as usize;
-const RAM_BANK_SIZE: usize = ERAM_REGION_SIZE;
-enum Mode {
-    RomBankingMode,
-    RamBankingMode,
-}
+// const ROM_BANK_SIZE: usize = (ROM_REGION_BANKN_END - ROM_REGION_BANKN_START + 1) as usize;
+// // const RAM_BANK_SIZE: usize = ERAM_REGION_SIZE;
+// enum Mode {
+//     RomBankingMode,
+//     RamBankingMode,
+// }
 
 pub struct Mbc3 {
     cartridge_base: CartridgeBase,
-    selected_mode: Mode,
+    // selected_mode: Mode,
     rtc_mode: bool,
     ram_timer_enabled: bool,
     reg_rtc: u8,
@@ -54,7 +54,7 @@ impl Mbc3 {
 
         Mbc3 {
             cartridge_base,
-            selected_mode: Mode::RomBankingMode,
+            // selected_mode: Mode::RomBankingMode,
             rtc_mode: false,
             ram_timer_enabled: false,
             reg_rtc: 0,
