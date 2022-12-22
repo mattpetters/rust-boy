@@ -29,3 +29,9 @@ https://gbdev.io/pandocs/
 https://www.youtube.com/watch?v=e87qKixKFME
 
 https://www.pastraiser.com/cpu/gameboy/gameboy_opcodes.html
+
+https://rylev.github.io/DMG-01/public/book/introduction.html
+
+http://bgb.bircd.org/pandocs.htm
+
+https://github.com/alexcrichton/jba/tree/rust
