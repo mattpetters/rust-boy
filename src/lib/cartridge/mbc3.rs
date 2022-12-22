@@ -1,14 +1,46 @@
 use crate::lib::cartridge::cartridge_base::CartridgeBase;
 use crate::lib::cartridge::{get_ram_size, Cartridge, RamDumper, CARTRIDGE_TYPE_ADDRESS};
 
-enum Mode {
-    RomBankingMode,
-    RamBankingMode,
-}
+// const DEFAULT_RAM_BANK: u8 = 0x00;
+// const DEFAULT_ROM_BANK: u8 = 0x01;
+
+pub const ROM_REGION_START: u16 = 0x0000;
+pub const ROM_REGION_END: u16 = 0x7FFF;
+pub const ROM_REGION_SIZE: usize = (ROM_REGION_END - ROM_REGION_START + 1) as usize;
+
+// 0xA000 - External RAM: 8KB (in cartridge, switchable bank, if any)
+pub const ERAM_REGION_START: u16 = 0xA000;
+pub const ERAM_REGION_END: u16 = 0xBFFF;
+pub const ERAM_REGION_SIZE: usize = (ERAM_REGION_END - ERAM_REGION_START + 1) as usize;
+
+// const RAM_ENABLE_START: u16 = 0x0000;
+// const RAM_ENABLE_END: u16 = 0x1FFF;
+// const ROM_BANK_SEL_START: u16 = 0x2000;
+// const ROM_BANK_SEL_END: u16 = 0x3FFF;
+// const RAM_BANK_SEL_START: u16 = 0x4000;
+// const RAM_BANK_SEL_END: u16 = 0x5FFF;
+// const BANK_MODE_START: u16 = 0x6000;
+// const BANK_MODE_END: u16 = 0x7FFF;
+
+// const ERAM_SIZE: usize = 32 * 1024;
+// const ROM_REGION_BANK0_START: u16 = ROM_REGION_START;
+// const ROM_REGION_BANK0_END: u16 = 0x3FFF;
+// const ROM_REGION_BANKN_START: u16 = 0x4000;
+// const ROM_REGION_BANKN_END: u16 = ROM_REGION_END;
+
+// const ROM_BANK_SIZE: usize = (ROM_REGION_BANKN_END - ROM_REGION_BANKN_START + 1) as usize;
+// // const RAM_BANK_SIZE: usize = ERAM_REGION_SIZE;
+// enum Mode {
+//     RomBankingMode,
+//     RamBankingMode,
+// }
 
 pub struct Mbc3 {
     cartridge_base: CartridgeBase,
-    selected_mode: Mode,
+    // selected_mode: Mode,
+    rtc_mode: bool,
+    ram_timer_enabled: bool,
+    reg_rtc: u8,
 }
 
 impl Mbc3 {
@@ -22,7 +54,10 @@ impl Mbc3 {
 
         Mbc3 {
             cartridge_base,
-            selected_mode: Mode::RomBankingMode,
+            // selected_mode: Mode::RomBankingMode,
+            rtc_mode: false,
+            ram_timer_enabled: false,
+            reg_rtc: 0,
         }
     }
 }
@@ -39,29 +74,43 @@ impl Cartridge for Mbc3 {
             }
             //Address range for rom bank number
             0x2000..=0x3FFF => {
-                //0 is also 1
-                let bank_number = if value == 0 { 1 } else { value };
-                //Only set lower 5 bits
-                self.cartridge_base.rom_bank =
-                    self.cartridge_base.rom_bank & 0x60 | bank_number & 0x1F;
+                self.cartridge_base.rom_bank = value;
             }
             //Address range for RAM bank number
-            0x4000..=0x5FFF => match self.selected_mode {
-                Mode::RamBankingMode => {
+            // 0x4000..=0x5FFF => match self.selected_mode {
+            //     Mode::RamBankingMode => {
+            //         self.cartridge_base.ram_bank = value;
+            //     }
+            //     Mode::RomBankingMode => {
+            //         //Only set upper 2 bits
+            //         self.cartridge_base.rom_bank =
+            //             self.cartridge_base.rom_bank | (value & 0x03) << 5;
+            //     }
+            // },
+            0x4000..=0x5FFF => {
+                if value <= 0x03 {
+                    self.rtc_mode = false;
                     self.cartridge_base.ram_bank = value;
+                } else if (0x08..=0x0C).contains(&value) {
+                    self.rtc_mode = true;
                 }
-                Mode::RomBankingMode => {
-                    //Only set upper 2 bits
-                    self.cartridge_base.rom_bank =
-                        self.cartridge_base.rom_bank | (value & 0x03) << 5;
-                }
-            },
+            }
             //Select Mode
-            0x6000..=0x7FFF => match value {
-                0 => self.selected_mode = Mode::RomBankingMode,
-                1 => self.selected_mode = Mode::RamBankingMode,
-                _ => {}
-            },
+            // 0x6000..=0x7FFF => match value {
+            //     0 => self.selected_mode = Mode::RomBankingMode,
+            //     1 => self.selected_mode = Mode::RamBankingMode,
+            //     _ => {}
+            // },
+            ERAM_REGION_START..=ERAM_REGION_END => {
+                if self.ram_timer_enabled {
+                    if self.rtc_mode {
+                        self.reg_rtc = value;
+                    } else {
+                        let offset = address - ERAM_REGION_START;
+                        self.write_ram(offset, value);
+                    }
+                }
+            }
             _ => {}
         }
     }

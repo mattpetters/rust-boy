@@ -6,6 +6,7 @@ A Gameboy emulator written in Rust.
 <img src="https://i.imgur.com/sAcRA67.png" width="500" >
 
 ## Todo
+
 - [ ] MBC3 support (50%)
 - [ ] Color support
 
@@ -30,6 +31,12 @@ Here is a simple outline of how you might go about writing a Game Boy emulator i
 I hope this helps! This is just a high-level overview, and there will be many more details to consider when writing a fully-featured Game Boy emulator. Let me know if you have any questions or need further guidance
 
 ## Resources
+
+https://github.com/gfx-rs/wgpu
+
+https://github.com/RustAudio/cpal
+
+https://github.com/emilk/egui
 
 https://gbdev.io/pandocs/
 
