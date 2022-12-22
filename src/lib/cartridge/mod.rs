@@ -1,16 +1,45 @@
 use crate::lib::cartridge::mbc1::Mbc1;
 use crate::lib::cartridge::mbc2::Mbc2;
+use crate::lib::cartridge::mbc3::Mbc3;
 use crate::lib::cartridge::rom_only::RomOnlyCartridge;
 
 pub mod cartridge_base;
 pub mod mbc1;
 pub mod mbc2;
+pub mod mbc3;
 pub mod rom_only;
 
 pub const EXT_RAM_SIZE: usize = 8192;
 pub const EXT_RAM_ADDRESS: usize = 0xA000;
 const CARTRIDGE_TYPE_ADDRESS: usize = 0x147;
 const RAM_SIZE_ADDRESS: usize = 0x149;
+
+/*
+Reference for Gameboy cartridge types:
+  CartridgeType is
+  0x00: ROM ONLY
+  0x01: ROM+MBC1
+  0x02: ROM+MBC1+RAM
+  0x03: ROM+MBC1+RAM+BATT
+  0x05: ROM+MBC2
+  0x06: ROM+MBC2+BATTERY
+  0x08: ROM+RAM
+  0x09: ROM+RAM+BATTERY
+  0x0B: ROM+MMM01
+  0x0C: ROM+MMM01+SRAM
+  0x0D: ROM+MMM01+SRAM+BATT
+  0x12: ROM+MBC3+RAM
+  0x13: ROM+MBC3+RAM+BATT
+  0x19: ROM+MBC5
+  0x1A: ROM+MBC5+RAM
+  0x1B: ROM+MBC5+RAM+BATT
+  0x1C: ROM+MBC5+RUMBLE
+  0x1D: ROM+MBC5+RUMBLE+SRAM
+  0x1E: ROM+MBC5+RUMBLE+SRAM+BATT
+  0x1F: Pocket Camera
+  0xFD: Bandai TAMA5
+  0xFE: Hudson HuC-3
+*/
 
 pub trait Cartridge {
     fn read(&self, address: u16) -> u8;
@@ -35,6 +64,7 @@ pub fn new_cartridge(
         0x00 | 0x08..=0x09 => Ok(Box::new(RomOnlyCartridge::new(rom, ram_dumper))),
         0x01..=0x03 => Ok(Box::new(Mbc1::new(rom, ram_dumper))),
         0x05..=0x06 => Ok(Box::new(Mbc2::new(rom, ram_dumper))),
+        0x12..=0x13 => Ok(Box::new(Mbc3::new(rom, ram_dumper))),
         _ => Err(format!("Unknown cartridge type: 0x{:X}", cartridge_type)),
     }
 }
