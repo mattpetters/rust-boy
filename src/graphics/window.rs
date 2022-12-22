@@ -62,7 +62,7 @@ impl<'a> GraphicsWindow<'a> {
         };
 
         let window = WindowBuilder::new()
-            .with_title("GBemulator")
+            .with_title("RustBoy")
             .with_inner_size(size)
             .build(&event_loop)
             .unwrap();
