@@ -3,13 +3,13 @@ selected_type = 'Keyboard'
 
 [controls.keyboard_map]
 Up = ['W']
-A = ['Space']
-Right = ['D']
 Select = ['K']
-B = ['LShift']
+A = ['Space']
 Start = ['Return']
-Down = ['S']
 Left = ['A']
+B = ['LShift']
+Right = ['D']
+Down = ['S']
 
 [color_palette]
 color1 = [
