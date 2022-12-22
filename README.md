@@ -35,3 +35,5 @@ https://rylev.github.io/DMG-01/public/book/introduction.html
 http://bgb.bircd.org/pandocs.htm
 
 https://github.com/alexcrichton/jba/tree/rust
+
+https://github.com/p4ddy1/gbemulator
