@@ -41,6 +41,11 @@ impl MainMenu {
                     state.palette_window_shown = true;
                     ui.close_menu();
                 }
+
+                if ui.button("Toggle Audio").clicked() {
+                    state.audio_enabled = !state.audio_enabled;
+                    ui.close_menu();
+                }
             });
         });
     }

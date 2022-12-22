@@ -1,3 +1,4 @@
+use crate::config::audio::Audio;
 use crate::config::color_palette::ColorPalette;
 use crate::config::controls::Controls;
 use serde::{Deserialize, Serialize};
@@ -7,6 +8,8 @@ pub struct Config {
     pub controls: Controls,
     #[serde(default = "ColorPalette::default")]
     pub color_palette: ColorPalette,
+    #[serde(default = "Audio::default")]
+    pub audio: Audio,
 }
 
 impl Config {
@@ -26,6 +29,7 @@ impl Default for Config {
         Config {
             controls: Controls::default(),
             color_palette: ColorPalette::default(),
+            audio: Audio::default(),
         }
     }
 }
