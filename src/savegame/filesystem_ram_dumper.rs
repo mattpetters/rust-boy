@@ -7,7 +7,7 @@ pub struct FilesystemRamDumper {
 
 impl FilesystemRamDumper {
     pub fn new(rom_filename: &String) -> Self {
-        let rom_name = if rom_filename.ends_with(".gb") {
+        let rom_name = if rom_filename.ends_with(".gb") || rom_filename.ends_with(".gbc") {
             &rom_filename[..rom_filename.len() - 3]
         } else {
             rom_filename

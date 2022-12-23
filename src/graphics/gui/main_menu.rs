@@ -23,7 +23,7 @@ impl MainMenu {
                         let filename = tinyfiledialogs::open_file_dialog(
                             "Open",
                             "",
-                            Some((&["*.gb"], "Gameboy ROM")),
+                            Some((&["*.gb", "*.gbc"], "Gameboy ROM")),
                         );
                         filename_sender.send(filename).unwrap();
                     });
