@@ -23,7 +23,7 @@ impl MainMenu {
                         let filename = tinyfiledialogs::open_file_dialog(
                             "Open",
                             "",
-                            Some((&["*.gb"], "Gameboy ROM")),
+                            Some((&["*.gb", "*.gbc"], "Gameboy ROM")),
                         );
                         filename_sender.send(filename).unwrap();
                     });
@@ -39,6 +39,11 @@ impl MainMenu {
 
                 if ui.button("Palette").clicked() {
                     state.palette_window_shown = true;
+                    ui.close_menu();
+                }
+
+                if ui.button("Toggle Audio").clicked() {
+                    state.audio_enabled = !state.audio_enabled;
                     ui.close_menu();
                 }
             });

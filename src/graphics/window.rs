@@ -146,6 +146,7 @@ impl<'a> GraphicsWindow<'a> {
 
         event_loop.run_return(move |event, _, control_flow| {
             platform.handle_event(&event);
+
             self.start_emulation(&rom_filename_receiver, &emulation);
 
             match event {

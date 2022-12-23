@@ -1,3 +1,4 @@
+pub mod audio;
 pub mod color_palette;
 pub mod config;
 pub mod config_storage;

@@ -6,6 +6,7 @@ pub mod palette_window;
 pub struct State {
     controls_window_shown: bool,
     palette_window_shown: bool,
+    audio_enabled: bool,
 }
 
 impl State {
@@ -13,6 +14,7 @@ impl State {
         State {
             controls_window_shown: false,
             palette_window_shown: false,
+            audio_enabled: true,
         }
     }
 }

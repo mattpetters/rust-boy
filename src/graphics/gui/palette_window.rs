@@ -79,6 +79,31 @@ impl PaletteWindow {
                             [255, 246, 211],
                         ]);
                     }
+
+                    if col2.button("Lava").clicked() {
+                        self.load_color_preset([
+                            [5, 31, 57],
+                            [74, 36, 128],
+                            [197, 58, 157],
+                            [255, 142, 128],
+                        ]);
+                    }
+                    if col2.button("2bit Demi").clicked() {
+                        self.load_color_preset([
+                            [33, 30, 32],
+                            [85, 85, 104],
+                            [160, 160, 139],
+                            [233, 239, 236],
+                        ]);
+                    }
+                    if col2.button("Ayyy4").clicked() {
+                        self.load_color_preset([
+                            [0, 48, 59],
+                            [255, 119, 119],
+                            [255, 206, 150],
+                            [241, 242, 218],
+                        ]);
+                    }
                 });
             });
     }

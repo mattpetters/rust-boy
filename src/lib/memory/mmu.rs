@@ -57,6 +57,8 @@ impl<'a> Mmu<'a> {
         self.read_joypad(joypad);
         self.gpu.step(clock_cycles);
         self.timer.step(clock_cycles);
+        // TODO: find a better way to disable audio
+        // comment out below to kill audio
         self.apu.step(clock_cycles);
         self.interrupts.interrupt_flags |= self.timer.interrupts_fired;
         self.interrupts.interrupt_flags |= self.gpu.interrupts_fired;

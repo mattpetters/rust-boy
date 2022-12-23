@@ -1,12 +1,15 @@
 use crate::lib::cartridge::mbc1::Mbc1;
 use crate::lib::cartridge::mbc2::Mbc2;
 use crate::lib::cartridge::mbc3::Mbc3;
+use crate::lib::cartridge::mbc5::Mbc5;
 use crate::lib::cartridge::rom_only::RomOnlyCartridge;
 
 pub mod cartridge_base;
 pub mod mbc1;
 pub mod mbc2;
 pub mod mbc3;
+pub mod mbc5;
+pub mod regions;
 pub mod rom_only;
 
 pub const EXT_RAM_SIZE: usize = 8192;
@@ -65,6 +68,7 @@ pub fn new_cartridge(
         0x01..=0x03 => Ok(Box::new(Mbc1::new(rom, ram_dumper))),
         0x05..=0x06 => Ok(Box::new(Mbc2::new(rom, ram_dumper))),
         0x12..=0x13 => Ok(Box::new(Mbc3::new(rom, ram_dumper))),
+        0x19 | 0x1A..=0x1E => Ok(Box::new(Mbc5::new(rom, ram_dumper))),
         _ => Err(format!("Unknown cartridge type: 0x{:X}", cartridge_type)),
     }
 }

@@ -44,6 +44,7 @@ impl Emulation {
                 //Cpal needs to be startet from a different thread because of a winit bug on windows
                 let mut audio_output = CpalAudioOutput::new(2048, Some(emulation_signal_sender));
                 let default_device = audio_output.get_default_device_name();
+
                 audio_output.start(default_device);
 
                 let mut apu = Apu::new(&mut audio_output);
