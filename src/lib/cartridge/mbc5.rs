@@ -1,14 +1,12 @@
 use crate::lib::cartridge::cartridge_base::CartridgeBase;
 use crate::lib::cartridge::{get_ram_size, Cartridge, RamDumper, CARTRIDGE_TYPE_ADDRESS};
 
-enum Mode {
-    RomBankingMode,
-    RamBankingMode,
-}
+use super::regions::{
+    RAM_BANK_SEL_END, RAM_BANK_SEL_START, RAM_ENABLE_END, ROM_BANK_SEL_END, ROM_BANK_SEL_START,
+};
 
 pub struct Mbc5 {
     cartridge_base: CartridgeBase,
-    selected_mode: Mode,
 }
 
 impl Mbc5 {
@@ -20,10 +18,7 @@ impl Mbc5 {
 
         let cartridge_base = CartridgeBase::new(rom, has_ram, ram_size, has_battery, ram_dumper);
 
-        Mbc5 {
-            cartridge_base,
-            selected_mode: Mode::RomBankingMode,
-        }
+        Mbc5 { cartridge_base }
     }
 }
 
@@ -34,34 +29,28 @@ impl Cartridge for Mbc5 {
 
     fn write(&mut self, address: u16, value: u8) {
         match address {
-            0x0..=0x1FFF => {
+            0x0..=RAM_ENABLE_END => {
                 self.cartridge_base.ram_enabled = value == 0x0A;
             }
-            //Address range for rom bank number
-            0x2000..=0x3FFF => {
+            ROM_BANK_SEL_START..=0x2FFF => {
+                // 8 least significant bits of ROM bank number
                 //0 is also 1
                 let bank_number = if value == 0 { 1 } else { value };
-                //Only set lower 5 bits
-                self.cartridge_base.rom_bank =
-                    self.cartridge_base.rom_bank & 0x60 | bank_number & 0x1F;
+                //Only set lower 8 bits
+                self.cartridge_base.rom_bank = bank_number & 0xFF;
             }
-            //Address range for RAM bank number
-            0x4000..=0x5FFF => match self.selected_mode {
-                Mode::RamBankingMode => {
-                    self.cartridge_base.ram_bank = value;
-                }
-                Mode::RomBankingMode => {
-                    //Only set upper 2 bits
-                    self.cartridge_base.rom_bank =
-                        self.cartridge_base.rom_bank | (value & 0x03) << 5;
-                }
-            },
-            //Select Mode
-            0x6000..=0x7FFF => match value {
-                0 => self.selected_mode = Mode::RomBankingMode,
-                1 => self.selected_mode = Mode::RamBankingMode,
-                _ => {}
-            },
+            0x3000..=ROM_BANK_SEL_END => {
+                // 9th bit of ROM bank number
+                self.cartridge_base.rom_bank = self.cartridge_base.rom_bank & 0xFF | (value & 0x01);
+            }
+            RAM_BANK_SEL_START..=RAM_BANK_SEL_END => {
+                // RAM bank number
+                /*
+                As for the MBC1s RAM Banking Mode, writing a value in the range $00-$0F maps
+                the corresponding external RAM bank (if any) into the memory area at A000-BFFF.
+                */
+                self.cartridge_base.ram_bank = value & 0x0F;
+            }
             _ => {}
         }
     }

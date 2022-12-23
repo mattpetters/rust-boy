@@ -9,6 +9,7 @@ pub mod mbc1;
 pub mod mbc2;
 pub mod mbc3;
 pub mod mbc5;
+pub mod regions;
 pub mod rom_only;
 
 pub const EXT_RAM_SIZE: usize = 8192;
